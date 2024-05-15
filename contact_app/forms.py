@@ -6,7 +6,7 @@ from django.forms import ModelForm
 class NewUserForm(UserCreationForm):
   class Meta:
     model=User
-    fields=['username', 'password', 'password2']
+    fields=['username']
 
 
 class AddContactForm(ModelForm):

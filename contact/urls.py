@@ -27,7 +27,6 @@ urlpatterns = [
     path('home/', home, name='home'),
     path('logout/', logout_view, name='logout'),  
     path('addcontact/', add_contact, name='add_contact'), 
-    path('viewcontact/', viewcontacts, name='view_contact'),  
     path('deletecontact/<int:cid>/', delete_contact, name='delete_contact'), 
     path('updatecontact/<int:cid>/', update_contact, name='update_contact'),  
     path('editcontact/<int:cid>/', edit_contact, name='edit_contact'), 

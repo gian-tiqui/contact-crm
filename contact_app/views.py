@@ -1,5 +1,4 @@
 from django.shortcuts import render, HttpResponse, redirect
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .forms import NewUserForm, AddContactForm
 from .models import Contact
@@ -29,7 +28,8 @@ def login_view(request):
     return render(request, 'login.html')
 
 def home(request):
-    return render(request, 'home.html')
+    contacts = Contact.objects.all()
+    return render(request, 'home.html', {'contacts': contacts})
 
 def logout_view(request):
     auth_logout(request)
@@ -40,32 +40,31 @@ def add_contact(request):
         form = AddContactForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('view_contact')
+            return redirect('home')
     else:
         form = AddContactForm()
 
     return render(request, "addcontact.html", {"form": form})
 
-def viewcontacts(request):
-    contacts = Contact.objects.all()
-    return render(request, 'viewcontact.html', {'contacts': contacts})
 
 def delete_contact(request, cid):
     data = Contact.objects.get(cid=cid)
     data.delete()
 
     contacts = Contact.objects.all()
-    return render(request, 'viewcontact.html', {"contacts": contacts})
+    return render(request, 'home.html', {"contacts": contacts})
 
 def edit_contact(request, cid):
     data = Contact.objects.get(cid=cid)
-    return render(request, 'editcontact.html', {"data": data})
+    form = AddContactForm(instance=data)
+    return render(request, 'editcontact.html', {"form": form, "data": data})
 
 def update_contact(request, cid):
     data = Contact.objects.get(cid=cid)
     form = AddContactForm(request.POST, request.FILES, instance=data)
     if form.is_valid():
         form.save()
-        return redirect('viewcontact')
+        return redirect('home')
     else:
-        return render(request, 'editcontact.html', {'data': data})  
+        print(form.errors) 
+        return render(request, 'editcontact.html', {'form': form, 'data': data})  

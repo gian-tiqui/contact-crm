@@ -5,35 +5,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<body>
-  <a href="/addcontact">Add contact</a>
-  <a href="/logout">Logout</a>
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>First Name</th>
-      <th>Middle Name</th>
-      <th>Last Name</th>
-      <th>Phone</th>
-      <th>Email</th>
-    </tr>
-    <tbody>
-      {% for con in contacts %}
-      <tr>
-        <td>{{ con.cid }}</td>
-        <td>{{ con.first_name }}</td>
-        <td>{{ con.middle_name }}</td>
-        <td>{{ con.last_name }}</td>
-        <td>{{ con.phone }}</td>
-        <td>{{ con.email }}</td>
-        <td><a href="/deletecontact/{{ con.cid }}">Delete</a></td>
-        <td><a href="/editcontact/{{ con.cid }}">Edit</a></td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<body class="bg-light">
+  <div class="container mt-3">
+    <div class="d-flex justify-content-between mb-3">
+      <h2>Contacts</h2>
+      <div class="d-flex">
+        <a href="/addcontact" class="btn btn-primary me-2">Add Contact</a>
+        <a href="/logout" class="btn btn-outline-primary">Logout</a>
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Middle Name</th>
+          <th>Last Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for con in contacts %}
+        <tr>
+          <td>{{ con.cid }}</td>
+          <td>{{ con.first_name }}</td>
+          <td>{{ con.middle_name }}</td>
+          <td>{{ con.last_name }}</td>
+          <td>{{ con.phone }}</td>
+          <td>{{ con.email }}</td>
+          <td>
+            <a href="/deletecontact/{{ con.cid }}" class="btn btn-sm btn-danger">Delete</a>
+            <a href="/editcontact/{{ con.cid }}" class="btn btn-sm btn-primary">Edit</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
 </body>
 
 </html>

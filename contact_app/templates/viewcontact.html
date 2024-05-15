@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Contacts</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Middle Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+    <tbody>
+      {% for con in contacts %}
+      <tr>
+        <td>{{ con.cid }}</td>
+        <td>{{ con.first_name }}</td>
+        <td>{{ con.middle_name }}</td>
+        <td>{{ con.last_name }}</td>
+        <td>{{ con.phone }}</td>
+        <td>{{ con.email }}</td>
+        <td><a href="/deletecontact/{{ con.cid }}">Delete</a></td>
+        <td><a href="/editcontact/{{ con.cid }}">Edit</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+
+</html>
